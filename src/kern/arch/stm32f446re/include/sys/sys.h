@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include "../sys/stm32_peps.h"
 
-#define NVIC ((NVIC_TypeDef*) (0xE000100))
+
 //Copied from given source
 typedef struct {
   volatile uint32_t CTRL;  // Enable SysTick
@@ -151,6 +151,8 @@ typedef enum
   FMPI2C1_ER_IRQn             = 96      /*!< FMPI2C1 Error Interrupt                                           */  
 } IRQn_TypeDef;
 
+#define NVIC ((NVIC_TypeDef*) (0xE000E100))
+#define __NVIC__PRIO_BITS 3U
 #define SYSTICK ((SysTick_Typedef*) 0xE000E010)
 #define SYSTICK_CTRL_CLKSOURCE_AHB (1 << 2)
 #define SYSTICK_CTRL_TICKINT (1 << 1)
