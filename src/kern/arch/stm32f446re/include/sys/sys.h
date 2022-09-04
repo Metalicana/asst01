@@ -49,7 +49,7 @@ typedef struct
         uint32_t RESERVED5[644U];
   volatile uint32_t STIR;                   /*!< Offset: 0xE00 ( /W)  Software Trigger Interrupt Register */
 }  NVIC_TypeDef;
-
+//1264
 typedef enum
 {
 /******  Cortex-M4 Processor Exceptions Numbers ****************************************************************/
