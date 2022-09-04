@@ -30,7 +30,7 @@ typedef struct {
   uint32_t AFSR;
   uint8_t reserved[76];
   uint32_t CPACR;
-}SCB_type;
+}SCB_typeDef;
 
 #define SYSTICK ((SysTick_Typedef*) 0xE000E010)
 #define SYSTICK_CTRL_CLKSOURCE_AHB (1 << 2)
