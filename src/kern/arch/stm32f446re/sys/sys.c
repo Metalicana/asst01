@@ -127,5 +127,5 @@ void __NVIC_EnableIRQn(IRQn_TypeDef IRQn)
 {   
     if(IRQn< 0)return;
     int iser = IRQn/32;
-    NVIC->ISER[iser] |= (1 << (IRQn & 31));
+    NVIC->ISER[iser] = (1 << (IRQn & 31));
 }

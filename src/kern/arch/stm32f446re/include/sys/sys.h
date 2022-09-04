@@ -35,21 +35,20 @@ typedef struct {
 //Given in the pdf , NVIC Datastructure
 typedef struct
 {
-//define NVIC register compenenets -- use volatile data type
-  volatile uint32_t ISER[8]; /*!< Offset: 0x000 Interrupt Set Enable Register*/
-  uint32_t RESERVED0[88];
-  volatile uint32_t ICER[8]; /*!< Offset: 0x180 Interrupt Clear Enable Register*/
-  uint32_t RSERVED1[24];
-  volatile uint32_t ISPR[8]; /*!< Offset: 0x200 Interrupt Set Pending Register*/
-  uint32_t RESERVED2[88];
-  volatile uint32_t ICPR[8]; /*!< Offset: 0x280 Interrupt Clear Pending Register*/
-  uint32_t RESERVED3[24];
-  volatile uint32_t IABR[8]; /*!< Offset: 0x300 Interrupt Active bit Register*/
-  uint32_t RESERVED4[56];
-  volatile uint8_t IP[240]; /*!< Offset: 0x400 Interrupt Priority Register (8Bit wide) */
-  uint32_t RESERVED5[644];
-  volatile uint32_t STIR; /*!< Offset: 0xF00 Software Trigger Interrupt Register*/
-}NVIC_TypeDef;
+  volatile uint32_t ISER[8U];               /*!< Offset: 0x000 (R/W)  Interrupt Set Enable Register */
+        uint32_t RESERVED0[24U];
+  volatile uint32_t ICER[8U];               /*!< Offset: 0x080 (R/W)  Interrupt Clear Enable Register */
+        uint32_t RESERVED1[24U];
+  volatile uint32_t ISPR[8U];               /*!< Offset: 0x100 (R/W)  Interrupt Set Pending Register */
+        uint32_t RESERVED2[24U];
+  volatile uint32_t ICPR[8U];               /*!< Offset: 0x180 (R/W)  Interrupt Clear Pending Register */
+        uint32_t RESERVED3[24U];
+  volatile uint32_t IABR[8U];               /*!< Offset: 0x200 (R/W)  Interrupt Active bit Register */
+        uint32_t RESERVED4[56U];
+  volatile uint8_t  IP[240U];               /*!< Offset: 0x300 (R/W)  Interrupt Priority Register (8Bit wide) */
+        uint32_t RESERVED5[644U];
+  volatile uint32_t STIR;                   /*!< Offset: 0xE00 ( /W)  Software Trigger Interrupt Register */
+}  NVIC_TypeDef;
 
 typedef enum
 {
@@ -152,7 +151,7 @@ typedef enum
 } IRQn_TypeDef;
 
 #define NVIC ((NVIC_TypeDef*) (0xE000E100))
-#define __NVIC__PRIO_BITS 3U
+#define __NVIC__PRIO_BITS 0U
 #define SYSTICK ((SysTick_Typedef*) 0xE000E010)
 #define SYSTICK_CTRL_CLKSOURCE_AHB (1 << 2)
 #define SYSTICK_CTRL_TICKINT (1 << 1)

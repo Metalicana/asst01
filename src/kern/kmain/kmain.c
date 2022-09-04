@@ -18,11 +18,12 @@ void kmain(void)
 	kprintf((uint8_t*)"%s",(uint8_t*)"Wellcome .... \n");
 
 	while(1){
-		__NVIC_EnableIRQn(USART2_IRQn);
-		//_USART_WRITE(USART2,(uint8_t*)"#######################\n");
-		__NVIC_SetPriority(USART2_IRQn, 2);
+		
+		_USART_WRITE(USART2,(uint8_t*)"#######################\n");
+		__NVIC_SetPriority(USART2_IRQn, 1);
 		uint32_t ans = __NVIC_GetPriority(USART2_IRQn);
 		kprintf((uint8_t*)"%d", (uint8_t*)&ans);
+		__NVIC_EnableIRQn(USART2_IRQn);
 		//Testing integer
 		
 		//Testing time consumption, using the Systick handler
