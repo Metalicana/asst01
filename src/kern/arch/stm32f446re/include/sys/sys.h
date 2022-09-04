@@ -11,7 +11,7 @@ typedef struct {
   volatile uint32_t VAL;
   volatile uint32_t CALIB;
 } SysTick_Typedef;
-
+//SCB datastructure
 typedef struct {
   uint32_t CPUID;
   uint32_t ICSR;
@@ -31,6 +31,26 @@ typedef struct {
   uint8_t reserved[76];
   uint32_t CPACR;
 }SCB_typeDef;
+//Given in the pdf , NVIC Datastructure
+typedef struct
+{
+//define NVIC register compenenets -- use volatile data type
+volatile uint32_t ISER[8]; /*!< Offset: 0x000 Interrupt Set Enable Register*/
+uint32_t RESERVED0[88];
+volatile uint32_t ICER[8]; /*!< Offset: 0x180 Interrupt Clear Enable Register*/
+uint32_t RSERVED1[24];
+volatile uint32_t ISPR[8]; /*!< Offset: 0x200 Interrupt Set Pending Register*/
+uint32_t RESERVED2[88];
+volatile uint32_t ICPR[8]; /*!< Offset: 0x280 Interrupt Clear Pending Register*/
+uint32_t RESERVED3[24];
+volatile uint32_t IABR[8]; /*!< Offset: 0x300 Interrupt Active bit Register*/
+uint32_t RESERVED4[56];
+volatile uint8_t IP[240]; /*!< Offset: 0x400 Interrupt Priority Register (8Bit wide) */
+uint32_t RESERVED5[644];
+volatile uint32_t STIR; /*!< Offset: 0xF00 Software Trigger Interrupt Register*/
+}NVIC_TypeDef;
+
+
 
 #define SYSTICK ((SysTick_Typedef*) 0xE000E010)
 #define SYSTICK_CTRL_CLKSOURCE_AHB (1 << 2)
