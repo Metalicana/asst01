@@ -19,7 +19,7 @@ LOAD object/usart.o
 LOAD object/stm32_startup.o
 LOAD object/sys.o
 
-.text           0x08000000     0x119c
+.text           0x08000000     0x11f8
                 0x08000000                _stext = .
  *(.isr_vector)
  .isr_vector    0x08000000      0x1c4 object/stm32_startup.o
@@ -156,7 +156,7 @@ LOAD object/sys.o
                 0x08000f44                MemManage_Handler
                 0x08000f4a                BusFault_Handler
                 0x08000f50                update_global_tick_count
- .text          0x08000f6c      0x170 object/sys.o
+ .text          0x08000f6c      0x1cc object/sys.o
                 0x08000f6c                sysTick_init
                 0x08000fa8                sysTick_enable
                 0x08000fdc                sysTick_disable
@@ -165,34 +165,35 @@ LOAD object/sys.o
                 0x08001040                getTime
                 0x08001080                update_msCount
                 0x0800109c                SysTick_Handler
+                0x080010dc                __NVIC_SetPriority
  *(.rodata)
- .rodata        0x080010dc       0x13 object/kstdio.o
- *fill*         0x080010ef        0x1 
- .rodata        0x080010f0       0xaa object/kmain.o
-                0x0800119c                . = ALIGN (0x4)
- *fill*         0x0800119a        0x2 
-                0x0800119c                _etext = .
-                0x0800119c                _la_data = LOADADDR (.data)
+ .rodata        0x08001138       0x13 object/kstdio.o
+ *fill*         0x0800114b        0x1 
+ .rodata        0x0800114c       0xaa object/kmain.o
+                0x080011f8                . = ALIGN (0x4)
+ *fill*         0x080011f6        0x2 
+                0x080011f8                _etext = .
+                0x080011f8                _la_data = LOADADDR (.data)
 
-.glue_7         0x0800119c        0x0
- .glue_7        0x0800119c        0x0 linker stubs
+.glue_7         0x080011f8        0x0
+ .glue_7        0x080011f8        0x0 linker stubs
 
-.glue_7t        0x0800119c        0x0
- .glue_7t       0x0800119c        0x0 linker stubs
+.glue_7t        0x080011f8        0x0
+ .glue_7t       0x080011f8        0x0 linker stubs
 
-.vfp11_veneer   0x0800119c        0x0
- .vfp11_veneer  0x0800119c        0x0 linker stubs
+.vfp11_veneer   0x080011f8        0x0
+ .vfp11_veneer  0x080011f8        0x0 linker stubs
 
-.v4_bx          0x0800119c        0x0
- .v4_bx         0x0800119c        0x0 linker stubs
+.v4_bx          0x080011f8        0x0
+ .v4_bx         0x080011f8        0x0 linker stubs
 
-.iplt           0x0800119c        0x0
- .iplt          0x0800119c        0x0 object/kstdio.o
+.iplt           0x080011f8        0x0
+ .iplt          0x080011f8        0x0 object/kstdio.o
 
-.rel.dyn        0x0800119c        0x0
- .rel.iplt      0x0800119c        0x0 object/kstdio.o
+.rel.dyn        0x080011f8        0x0
+ .rel.iplt      0x080011f8        0x0 object/kstdio.o
 
-.data           0x20000000        0x0 load address 0x0800119c
+.data           0x20000000        0x0 load address 0x080011f8
                 0x20000000                _sdata = .
  *(.data)
  .data          0x20000000        0x0 object/kstdio.o
@@ -208,10 +209,10 @@ LOAD object/sys.o
                 0x20000000                . = ALIGN (0x4)
                 0x20000000                _edata = .
 
-.igot.plt       0x20000000        0x0 load address 0x0800119c
+.igot.plt       0x20000000        0x0 load address 0x080011f8
  .igot.plt      0x20000000        0x0 object/kstdio.o
 
-.bss            0x20000000       0x24 load address 0x0800119c
+.bss            0x20000000       0x24 load address 0x080011f8
                 0x20000000                _sbss = .
  *(.bss)
  .bss           0x20000000        0x0 object/kstdio.o

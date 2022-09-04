@@ -111,3 +111,22 @@ void SysTick_Handler(void)
     *pICSR |= ( 1 << 25);
     // kprintf((uint8_t*)"%s",(uint8_t*)"SysTick_Handler after? death4\n\r");
 }
+
+void __NVIC_SetPriority(IRQn_TypeDef IRQn, uint32_t priority)
+{
+    int ipr = IRQn/4;
+    int byteOffset = IRQn % 4;
+    NVIC->IP[ipr] |= (priority << byteOffset);
+}
+uint32_t __NVIC_GetPriority(IRQn_TypeDef IRQn)
+{
+    int ipr = IRQn/4;
+    int byteOffset = IRQn % 4;
+    return ((NVIC->IP[ipr]) & ( 255U<< byteOffset));
+}
+void __NVIC_EnableIRQn(IRQn_TypeDef IRQn)
+{
+    int iser = IRQn/32;
+    int offset = IRQn%8;
+    NVIC->ISER[iser] |= (1 << offset);
+}
