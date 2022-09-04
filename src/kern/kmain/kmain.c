@@ -22,58 +22,58 @@ void kmain(void)
 		
 		//Testing time consumption, using the Systick handler
 
-		_USART_WRITE(USART2,(uint8_t*)"#######################\n");
+		// _USART_WRITE(USART2,(uint8_t*)"#######################\n");
 
-		//Systick show
-		_USART_WRITE(USART2,(uint8_t*)"SysTick Count: ");
-		val = getSysTickCount();
-		kprintf((uint8_t*)"%d",(uint8_t*)&val);
-		endl;
+		// //Systick show
+		// _USART_WRITE(USART2,(uint8_t*)"SysTick Count: ");
+		// val = getSysTickCount();
+		// kprintf((uint8_t*)"%d",(uint8_t*)&val);
+		// endl;
 
-		_USART_WRITE(USART2,(int8_t*)"Time before 1000000 loop: ");
-		tm1 = getTime();
-		kprintf((uint8_t*)"%d",(uint8_t*)&tm1);
-		endl;
-		int ans = 1;
-		//Using a big loop
-		for(int i=1;i<=1000000;i++)
-		{
-			ans++;
-		}
-		tm2 = getTime();
-		_USART_WRITE(USART2,(int8_t*)"\nTime after 1000000 loop: ");
-		kprintf((uint8_t*)"%d",(uint8_t*)&tm2);
-		endl;
-		_USART_WRITE(USART2,(int8_t*)"\nTotal time: ");
-		tm2 -= tm1;
-		kprintf((uint8_t*)"%d",(uint8_t*)&tm2);
-		endl;
+		// _USART_WRITE(USART2,(int8_t*)"Time before 1000000 loop: ");
+		// tm1 = getTime();
+		// kprintf((uint8_t*)"%d",(uint8_t*)&tm1);
+		// endl;
+		// int ans = 1;
+		// //Using a big loop
+		// for(int i=1;i<=1000000;i++)
+		// {
+		// 	ans++;
+		// }
+		// tm2 = getTime();
+		// _USART_WRITE(USART2,(int8_t*)"\nTime after 1000000 loop: ");
+		// kprintf((uint8_t*)"%d",(uint8_t*)&tm2);
+		// endl;
+		// _USART_WRITE(USART2,(int8_t*)"\nTotal time: ");
+		// tm2 -= tm1;
+		// kprintf((uint8_t*)"%d",(uint8_t*)&tm2);
+		// endl;
 
-		_USART_WRITE(USART2,(int8_t*)"Time before 10000 loop: ");
-		tm1 = getTime(); 
-		kprintf((uint8_t*)"%d",(uint8_t*)&tm1);
-		ans = 1;
-		//Using a tiny loop
-		for(int i=1;i<=10000;i++)
-		{
-			ans++;
-		}
-		tm2 = getTime();
-		_USART_WRITE(USART2,(int8_t*)"\nTime after 10000 loop: ");
-		kprintf((uint8_t*)"%d",(uint8_t*)&tm2);
-		endl;
+		// _USART_WRITE(USART2,(int8_t*)"Time before 10000 loop: ");
+		// tm1 = getTime(); 
+		// kprintf((uint8_t*)"%d",(uint8_t*)&tm1);
+		// ans = 1;
+		// //Using a tiny loop
+		// for(int i=1;i<=10000;i++)
+		// {
+		// 	ans++;
+		// }
+		// tm2 = getTime();
+		// _USART_WRITE(USART2,(int8_t*)"\nTime after 10000 loop: ");
+		// kprintf((uint8_t*)"%d",(uint8_t*)&tm2);
+		// endl;
 
-		_USART_WRITE(USART2,(int8_t*)"\nTotal time: ");
-		tm2 -= tm1;
-		kprintf((uint8_t*)"%d",(uint8_t*)&tm2);
-		endl;
-		//Systick show
-		_USART_WRITE(USART2,(uint8_t*)"SysTick Count: ");
-		val = getSysTickCount();
-		kprintf((uint8_t*)"%d",(uint8_t*)&val);
-		endl;
-		//sysTick_disable();
-		_USART_WRITE(USART2,(uint8_t*)"-----------------------------#\n");
+		// _USART_WRITE(USART2,(int8_t*)"\nTotal time: ");
+		// tm2 -= tm1;
+		// kprintf((uint8_t*)"%d",(uint8_t*)&tm2);
+		// endl;
+		// //Systick show
+		// _USART_WRITE(USART2,(uint8_t*)"SysTick Count: ");
+		// val = getSysTickCount();
+		// kprintf((uint8_t*)"%d",(uint8_t*)&val);
+		// endl;
+		// //sysTick_disable();
+		// _USART_WRITE(USART2,(uint8_t*)"-----------------------------#\n");
 
 		// kprintf((uint8_t*)"%s", (uint8_t*) " ");
 		// kprintf((uint8_t*)"%s", (uint8_t*) "Enter an integer, press # for end of line: ");
@@ -104,20 +104,20 @@ void kmain(void)
 		// kprintf((uint8_t*)"%x", (uint8_t*) &b);
 		// endl;
 
-		// //Testing floating numbers
-		// kprintf((uint8_t*)"%s", (uint8_t*) " ");
-		// kprintf((uint8_t*)"%s", (uint8_t*) "Enter a floating point number, press # for end of line: ");
-		// kscanf((uint8_t*) "%f", (uint8_t*) &f);
-		// endl;
+		//Testing floating numbers
+		kprintf((uint8_t*)"%s", (uint8_t*) " ");
+		kprintf((uint8_t*)"%s", (uint8_t*) "Enter a floating point number, press # for end of line: ");
+		kscanf((uint8_t*) "%f", (uint8_t*) &f);
+		endl;
 
-		// kprintf((uint8_t*)"%s", (uint8_t*) "You entered: ");
-		// kprintf((uint8_t*)"%f", (uint8_t*) &f);
-		// f++;
-		// endl;
+		kprintf((uint8_t*)"%s", (uint8_t*) "You entered: ");
+		kprintf((uint8_t*)"%f", (uint8_t*) &f);
+		f++;
+		endl;
 
-		// kprintf((uint8_t*)"%s", (uint8_t*) "After incrementing by 1: ");
-		// kprintf((uint8_t*)"%f", (uint8_t*) &f);
-		// endl;
+		kprintf((uint8_t*)"%s", (uint8_t*) "After incrementing by 1: ");
+		kprintf((uint8_t*)"%f", (uint8_t*) &f);
+		endl;
 		
 		// kprintf((uint8_t*)"%f", (uint8_t*) &x);
 		
