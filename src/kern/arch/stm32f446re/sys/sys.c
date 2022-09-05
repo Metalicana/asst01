@@ -114,16 +114,26 @@ void SysTick_Handler(void)
 //Tested but TODO handle for negative IRQs
 void __NVIC_SetPriority(IRQn_TypeDef IRQn, uint32_t priority)
 {
+    //The way this works is, if someone performs  x & with 15 where x is negative,
+    //x = -14 . x&15 =  2, 2-4 is negative, 
+    //x = -13 has the same issue
+    //However increasing the number to the extreme -1 , x & 15 = 15 , and 15-4 is 11, which is the last index of our SHP register
+    // the shifting 5 bits, and & with 255 has periodic property 
+    // like 7,15, 31 will result in 224
     if(IRQn < 0)
     {
-        
+        int shp = (IRQn & 15) - 4U;
+        SCB->SHP[shp] = (uint8_t)((priority << (8U - __NVIC__PRIO_BITS)) & 255U );
     }
     else NVIC->IP[IRQn] = (uint8_t)( (priority << (8U-__NVIC__PRIO_BITS)) & 255U);
 }
 //Tested
 uint32_t __NVIC_GetPriority(IRQn_TypeDef IRQn)
 {
-    if(IRQn < 0)return 0;
+    if(IRQn < 0)
+    {
+        return (uint32_t)(((uint32_t)SCB->SHP[IRQn]) >> (8U-__NVIC__PRIO_BITS));
+    }
     return (uint32_t)(((uint32_t)NVIC->IP[IRQn]) >> (8U-__NVIC__PRIO_BITS));
 }
 //Will not work with negative numbers
@@ -166,8 +176,24 @@ uint32_t __get_PRIMASK(void)
     __asm volatile("MRS %0, primask" : "=r" (res) );
     return (res);
 }
+uint32_t __set_PRIMASK(uint32_t value)
+{
+    __asm volatile("MSR primask, %0" : : "r" (value) : "memory");
+}
 //TODO TEST
 void __set_BASEPRI(uint32_t value)
 {
     __asm volatile("MSR basepri, %0" : : "r" (value) : "memory");
 }
+
+//TODO implement __get_BASEPRI
+//TODO implement __unset_BASEPRI
+
+//TODO implement __enable_fault_irq(void)
+//TODO implement __set_FAULTMASK(uint32_t value)
+//TODO implement __disable_fault_irq(void)
+//TODO __get_FAULTMASK
+
+//TODO __clear_pending_IRQn(IRQn_TypeDef IRQn)
+//TODO __get_pending_IRQn(IRQn_TypeDef IRQn)
+//TODO __NVIC_getActive(IRQn_TypeDef IRQn)

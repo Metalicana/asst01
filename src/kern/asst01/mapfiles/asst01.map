@@ -19,7 +19,7 @@ LOAD object/usart.o
 LOAD object/stm32_startup.o
 LOAD object/sys.o
 
-.text           0x08000000     0x14dc
+.text           0x08000000     0x1514
                 0x08000000                _stext = .
  *(.isr_vector)
  .isr_vector    0x08000000      0x1c4 object/stm32_startup.o
@@ -156,7 +156,7 @@ LOAD object/sys.o
                 0x08001018                MemManage_Handler
                 0x0800101e                BusFault_Handler
                 0x08001024                update_global_tick_count
- .text          0x08001040      0x324 object/sys.o
+ .text          0x08001040      0x35c object/sys.o
                 0x08001040                sysTick_init
                 0x0800107c                sysTick_enable
                 0x080010b0                sysTick_disable
@@ -166,42 +166,42 @@ LOAD object/sys.o
                 0x08001154                update_msCount
                 0x08001170                SysTick_Handler
                 0x080011b0                __NVIC_SetPriority
-                0x080011e8                __NVIC_GetPriority
-                0x08001220                __NVIC_EnableIRQn
-                0x0800126c                __NVIC_DisableIRQn
-                0x080012b8                isEnabled
-                0x08001310                __disable_irq
-                0x08001320                __enable_irq
-                0x08001330                __get_PRIMASK
-                0x0800134a                __set_BASEPRI
+                0x0800120c                __NVIC_GetPriority
+                0x08001258                __NVIC_EnableIRQn
+                0x080012a4                __NVIC_DisableIRQn
+                0x080012f0                isEnabled
+                0x08001348                __disable_irq
+                0x08001358                __enable_irq
+                0x08001368                __get_PRIMASK
+                0x08001382                __set_BASEPRI
  *(.rodata)
- .rodata        0x08001364       0x13 object/kstdio.o
- *fill*         0x08001377        0x1 
- .rodata        0x08001378      0x162 object/kmain.o
-                0x080014dc                . = ALIGN (0x4)
- *fill*         0x080014da        0x2 
-                0x080014dc                _etext = .
-                0x080014dc                _la_data = LOADADDR (.data)
+ .rodata        0x0800139c       0x13 object/kstdio.o
+ *fill*         0x080013af        0x1 
+ .rodata        0x080013b0      0x162 object/kmain.o
+                0x08001514                . = ALIGN (0x4)
+ *fill*         0x08001512        0x2 
+                0x08001514                _etext = .
+                0x08001514                _la_data = LOADADDR (.data)
 
-.glue_7         0x080014dc        0x0
- .glue_7        0x080014dc        0x0 linker stubs
+.glue_7         0x08001514        0x0
+ .glue_7        0x08001514        0x0 linker stubs
 
-.glue_7t        0x080014dc        0x0
- .glue_7t       0x080014dc        0x0 linker stubs
+.glue_7t        0x08001514        0x0
+ .glue_7t       0x08001514        0x0 linker stubs
 
-.vfp11_veneer   0x080014dc        0x0
- .vfp11_veneer  0x080014dc        0x0 linker stubs
+.vfp11_veneer   0x08001514        0x0
+ .vfp11_veneer  0x08001514        0x0 linker stubs
 
-.v4_bx          0x080014dc        0x0
- .v4_bx         0x080014dc        0x0 linker stubs
+.v4_bx          0x08001514        0x0
+ .v4_bx         0x08001514        0x0 linker stubs
 
-.iplt           0x080014dc        0x0
- .iplt          0x080014dc        0x0 object/kstdio.o
+.iplt           0x08001514        0x0
+ .iplt          0x08001514        0x0 object/kstdio.o
 
-.rel.dyn        0x080014dc        0x0
- .rel.iplt      0x080014dc        0x0 object/kstdio.o
+.rel.dyn        0x08001514        0x0
+ .rel.iplt      0x08001514        0x0 object/kstdio.o
 
-.data           0x20000000        0x0 load address 0x080014dc
+.data           0x20000000        0x0 load address 0x08001514
                 0x20000000                _sdata = .
  *(.data)
  .data          0x20000000        0x0 object/kstdio.o
@@ -217,10 +217,10 @@ LOAD object/sys.o
                 0x20000000                . = ALIGN (0x4)
                 0x20000000                _edata = .
 
-.igot.plt       0x20000000        0x0 load address 0x080014dc
+.igot.plt       0x20000000        0x0 load address 0x08001514
  .igot.plt      0x20000000        0x0 object/kstdio.o
 
-.bss            0x20000000       0x24 load address 0x080014dc
+.bss            0x20000000       0x24 load address 0x08001514
                 0x20000000                _sbss = .
  *(.bss)
  .bss           0x20000000        0x0 object/kstdio.o

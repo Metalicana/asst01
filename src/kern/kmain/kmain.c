@@ -19,7 +19,7 @@ void kmain(void)
 
 	while(1){
 		
-		//Testing Set priority and Get Priority
+		//Testing Set priority and Get Priority for IRQn >=0
 		__NVIC_SetPriority(USART2_IRQn, 1);
 		uint32_t ans = __NVIC_GetPriority(USART2_IRQn);
 		kprintf((uint8_t*)"%s",(uint8_t*)"Set priority is: ");
@@ -42,7 +42,6 @@ void kmain(void)
 		}
 		else  kprintf((uint8_t*)"%s",(uint8_t*)"Interrupt is disabled\n");
 
-		__NVIC_EnableIRQn(USART2_IRQn);
 		__disable_irq();
 
 		int primsk = __get_PRIMASK();
@@ -61,7 +60,15 @@ void kmain(void)
 		}
 		else kprintf((uint8_t*)"%s",(uint8_t*)"All Exceptions with configurable priority is enabled\n");
 
-		
+		//Testing set and get priority <0
+		__NVIC_SetPriority(SVCall_IRQn,3);
+		ans = __NVIC_GetPriority(USART2_IRQn);
+		kprintf((uint8_t*)"%s",(uint8_t*)"Set priority for SVCall_IRQn is: ");
+		kprintf((uint8_t*)"%d", (uint8_t*)&ans);
+		endl;
+
+		//If we set the base pri to 3, then SVCALL should now 
+		__set_BASEPRI(3);
 		//Testing integer
 		
 		//Testing time consumption, using the Systick handler
