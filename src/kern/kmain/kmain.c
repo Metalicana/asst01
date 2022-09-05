@@ -19,11 +19,49 @@ void kmain(void)
 
 	while(1){
 		
-		_USART_WRITE(USART2,(uint8_t*)"#######################\n");
+		//Testing Set priority and Get Priority
 		__NVIC_SetPriority(USART2_IRQn, 1);
 		uint32_t ans = __NVIC_GetPriority(USART2_IRQn);
+		kprintf((uint8_t*)"%s",(uint8_t*)"Set priority is: ");
 		kprintf((uint8_t*)"%d", (uint8_t*)&ans);
+		endl;
+
+		//Testing Enable and Disable
 		__NVIC_EnableIRQn(USART2_IRQn);
+		if(isEnabled(USART2_IRQn) == 1)
+		{
+			kprintf((uint8_t*)"%s",(uint8_t*)"Interrupt is enabled\n");
+		}
+		else  kprintf((uint8_t*)"%s",(uint8_t*)"Interrupt is disabled\n");
+
+		__NVIC_DisableIRQn(USART2_IRQn);
+
+		if(isEnabled(USART2_IRQn) == 1)
+		{
+			kprintf((uint8_t*)"%s",(uint8_t*)"Interrupt is enabled\n");
+		}
+		else  kprintf((uint8_t*)"%s",(uint8_t*)"Interrupt is disabled\n");
+
+		__NVIC_EnableIRQn(USART2_IRQn);
+		__disable_irq();
+
+		int primsk = __get_PRIMASK();
+
+		if(primsk != 0)
+		{
+			kprintf((uint8_t*)"%s",(uint8_t*)"All Exceptions with configurable priority is disabled\n");
+		}
+
+		__enable_irq();
+
+		primsk = __get_PRIMASK();
+		if(primsk != 0)
+		{
+			kprintf((uint8_t*)"%s",(uint8_t*)"All Exceptions with configurable priority is disabled\n");
+		}
+		else kprintf((uint8_t*)"%s",(uint8_t*)"All Exceptions with configurable priority is enabled\n");
+
+		
 		//Testing integer
 		
 		//Testing time consumption, using the Systick handler
