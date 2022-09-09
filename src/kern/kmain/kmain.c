@@ -62,7 +62,7 @@ void kmain(void)
 
 		//Testing set and get priority <0
 		__NVIC_SetPriority(SVCall_IRQn,3);
-		ans = __NVIC_GetPriority(USART2_IRQn);
+		ans = __NVIC_GetPriority(SVCall_IRQn);
 		kprintf((uint8_t*)"%s",(uint8_t*)"Set priority for SVCall_IRQn is: ");
 		kprintf((uint8_t*)"%d", (uint8_t*)&ans);
 		endl;

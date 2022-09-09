@@ -169,6 +169,7 @@ void __enable_irq(void)
 {
     __asm volatile("cpsie i" : : : "memory");
 }
+
 //Tested
 uint32_t __get_PRIMASK(void)
 {
@@ -186,6 +187,10 @@ void __set_BASEPRI(uint32_t value)
     __asm volatile("MSR basepri, %0" : : "r" (value) : "memory");
 }
 
+uint32_t __get_BASEPRI(void)
+{
+    uint32_t res;
+}
 //TODO implement __get_BASEPRI
 //TODO implement __unset_BASEPRI
 
