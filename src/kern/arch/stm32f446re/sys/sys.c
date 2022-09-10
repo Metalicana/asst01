@@ -234,10 +234,12 @@ void __set_FAULTMASK(uint32_t faultMask)
 {
   __asm volatile ("MSR faultmask, %0" : : "r" (faultMask) : "memory");
 }
+//TODO test
 void __disable_fault_irq(void)
 {
   __asm volatile ("cpsid f" : : : "memory");
 }
+//TODO test
 uint32_t __get_FAULTMASK(void)
 {
   uint32_t result;
@@ -255,6 +257,7 @@ void __NVIC_ClearPendingIRQ(IRQn_TypeDef IRQn)
     NVIC->ICPR[icpr] = (uint32_t)(1UL << (((uint32_t)IRQn) & 31));
   }
 }
+//Tested
 uint32_t __NVIC_GetPendingIRQ(IRQn_TypeDef IRQn)
 {
 
@@ -262,7 +265,8 @@ uint32_t __NVIC_GetPendingIRQ(IRQn_TypeDef IRQn)
   else
   {
     int ispr = IRQn/32;
-    if(NVIC->ISPR[ispr] & (1UL<< (IRQn&31)) != 0)return 1;
+    int shft = IRQn%32;
+    if((NVIC->ISPR[ispr] & (1<<shft)) >> (shft) != 0)return 1;
     else return 0;
   }
 }
