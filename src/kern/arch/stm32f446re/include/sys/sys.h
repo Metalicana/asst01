@@ -177,6 +177,8 @@ uint32_t getSysTickCount(void);
 void update_msCount();
 void SysTick_Handler(void);
 
+
+void EXTI0_Handler(void);
 //New methods for NVIC
 void __NVIC_SetPriority(IRQn_TypeDef IRQn, uint32_t priority);
 uint32_t __NVIC_GetPriority(IRQn_TypeDef IRQn);
@@ -188,5 +190,7 @@ void __enable_irq(void);
 uint32_t __get_PRIMASK(void);
 void _set_PRIMASK(uint32_t value);
 void __set_BASEPRI(uint32_t value);
+void __unset_BASEPRI();
+uint32_t __get_BASEPRI(void);
 
 #endif

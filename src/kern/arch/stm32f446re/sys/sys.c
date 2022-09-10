@@ -29,6 +29,7 @@
 /*
 */
 #include "../include/sys/sys.h"
+#include "../include/dev/usart.h"
 #include <stdint.h>
 //Method that configures the systick
 //Load value 
@@ -111,6 +112,10 @@ void SysTick_Handler(void)
     *pICSR |= ( 1 << 25);
     // kprintf((uint8_t*)"%s",(uint8_t*)"SysTick_Handler after? death4\n\r");
 }
+void EXTI0_Handler(void)
+{
+	_USART_WRITE(USART2,(uint8_t*)"Interrupt triggered\n");
+}
 //Tested but TODO handle for negative IRQs
 void __NVIC_SetPriority(IRQn_TypeDef IRQn, uint32_t priority)
 {
@@ -122,7 +127,7 @@ void __NVIC_SetPriority(IRQn_TypeDef IRQn, uint32_t priority)
     // like 7,15, 31 will result in 224
     if(IRQn < 0)
     {
-        int shp = (IRQn & 15) - 4U;
+        int shp = ((uint32_t)IRQn & 15) - 4U;
         SCB->SHP[shp] = (uint8_t)((priority << (8U - __NVIC__PRIO_BITS)) & 255U );
     }
     else NVIC->IP[IRQn] = (uint8_t)( (priority << (8U-__NVIC__PRIO_BITS)) & 255U);
@@ -132,10 +137,12 @@ uint32_t __NVIC_GetPriority(IRQn_TypeDef IRQn)
 {
     if(IRQn < 0)
     {
-        return (uint32_t)(((uint32_t)SCB->SHP[IRQn]) >> (8U-__NVIC__PRIO_BITS));
+        int shp = ((uint32_t)IRQn & 15) - 4U;
+        return (uint32_t)(((uint32_t)SCB->SHP[shp]) >> (8U-__NVIC__PRIO_BITS));
     }
     return (uint32_t)(((uint32_t)NVIC->IP[IRQn]) >> (8U-__NVIC__PRIO_BITS));
 }
+
 //Will not work with negative numbers
 //Tested
 void __NVIC_EnableIRQn(IRQn_TypeDef IRQn)
@@ -182,17 +189,15 @@ uint32_t __set_PRIMASK(uint32_t value)
     __asm volatile("MSR primask, %0" : : "r" (value) : "memory");
 }
 //TODO TEST
-void __set_BASEPRI(uint32_t value)
+__attribute__((naked)) void __set_BASEPRI(uint32_t value)
 {
     __asm volatile("MSR basepri, %0" : : "r" (value) : "memory");
 }
-
-uint32_t __get_BASEPRI(void)
+//TODO test
+void __unset_BASEPRI()
 {
-    uint32_t res;
+    __set_BASEPRI(0);
 }
-//TODO implement __get_BASEPRI
-//TODO implement __unset_BASEPRI
 
 //TODO implement __enable_fault_irq(void)
 //TODO implement __set_FAULTMASK(uint32_t value)

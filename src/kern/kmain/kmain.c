@@ -4,6 +4,8 @@
 #include "../arch/stm32f446re/include/sys/sys.h"
 #include <stdint.h>
 #define endl kprintf((uint8_t*)"%s",(uint8_t*)"\n")
+
+
 void kmain(void)
 {
 	__sys_init();
@@ -68,7 +70,21 @@ void kmain(void)
 		endl;
 
 		//If we set the base pri to 3, then SVCALL should now 
-		__set_BASEPRI(3);
+		// __set_BASEPRI(7);
+		// ans = __get_BASEPRI();
+		// kprintf((uint8_t*)"%s",(uint8_t*)"BASEPRI set to: ");
+		// kprintf((uint8_t*)"%d", (uint8_t*)&ans);
+		// endl;
+		__NVIC_EnableIRQn(EXTI0_IRQn);
+		__NVIC_SetPriority(EXTI0_IRQn,5);
+		NVIC->STIR = EXTI0_IRQn;
+
+
+		__set_BASEPRI(4);
+		NVIC->STIR = EXTI0_IRQn;
+		__unset_BASEPRI();
+		
+
 		//Testing integer
 		
 		//Testing time consumption, using the Systick handler
