@@ -189,7 +189,7 @@ uint32_t isEnabled(IRQn_TypeDef IRQn);
 void __disable_irq(void);
 void __enable_irq(void);
 uint32_t __get_PRIMASK(void);
-void _set_PRIMASK(uint32_t value);
+void __set_PRIMASK(uint32_t value);
 void __set_BASEPRI(uint32_t basePri);
 void __unset_BASEPRI();
 uint32_t __get_BASEPRI(void);
