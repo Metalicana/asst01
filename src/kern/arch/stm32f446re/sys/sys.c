@@ -116,6 +116,10 @@ void EXTI0_Handler(void)
 {
 	_USART_WRITE(USART2,(uint8_t*)"Interrupt triggered\n");
 }
+void SVCall_Handler(void)
+{
+    _USART_WRITE(USART2,(uint8_t*)"System Exception triggered\n");
+}
 //Tested but TODO handle for negative IRQs
 void __NVIC_SetPriority(IRQn_TypeDef IRQn, uint32_t priority)
 {
@@ -224,7 +228,7 @@ uint32_t __get_BASEPRI(void)
   __asm volatile ("MRS %0, basepri" : "=r" (result) );
   return(result>>4);
 }
-//TODO TEST
+//Tested
 void __enable_fault_irq(void)
 {
   __asm volatile ("cpsie f" : : : "memory");
@@ -234,12 +238,12 @@ void __set_FAULTMASK(uint32_t faultMask)
 {
   __asm volatile ("MSR faultmask, %0" : : "r" (faultMask) : "memory");
 }
-//TODO test
+//tested
 void __disable_fault_irq(void)
 {
   __asm volatile ("cpsid f" : : : "memory");
 }
-//TODO test
+//tested
 uint32_t __get_FAULTMASK(void)
 {
   uint32_t result;

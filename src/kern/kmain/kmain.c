@@ -64,6 +64,7 @@ void kmain(void)
 		else kprintf((uint8_t*)"%s",(uint8_t*)"All Exceptions with configurable priority is enabled\n");
 
 		//Testing set and get priority <0
+		__NVIC_EnableIRQn(SVCall_IRQn);
 		__NVIC_SetPriority(SVCall_IRQn,3);
 		ans = __NVIC_GetPriority(SVCall_IRQn);
 		kprintf((uint8_t*)"%s",(uint8_t*)"Set priority for SVCall_IRQn is: ");
@@ -92,7 +93,7 @@ void kmain(void)
 		NVIC->STIR = EXTI0_IRQn;
 		if(__NVIC_GetPendingIRQ(EXTI0_IRQn) == 1)
 		{
-			kprintf((uint8_t*)"%s",(uint8_t*)"EXTI0_IRQn is currently in pending");
+			kprintf((uint8_t*)"%s",(uint8_t*)"EXTI0_IRQn is currently in pending\n");
 		}
 		__NVIC_ClearPendingIRQ(EXTI0_IRQn);
 		__unset_BASEPRI();
@@ -102,7 +103,17 @@ void kmain(void)
 		kprintf((uint8_t*)"%d", (uint8_t*)&ans);
 		endl;
 
+		__disable_fault_irq();
+		if(__get_FAULTMASK() == 1)
+		{
+			kprintf((uint8_t*)"%s",(uint8_t*)"Disabled all interrupts except NMI's\n");
+		}
+		NVIC->STIR = EXTI0_IRQn;
+		__NVIC_ClearPendingIRQ(EXTI0_IRQn);
 
+
+		__enable_fault_irq();
+		NVIC->STIR = EXTI0_IRQn;
 		//Testing integer
 		
 		//Testing time consumption, using the Systick handler
