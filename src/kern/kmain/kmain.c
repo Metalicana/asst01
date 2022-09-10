@@ -22,11 +22,13 @@ void kmain(void)
 	while(1){
 		
 		//Testing Set priority and Get Priority for IRQn >=0
+		SCB->AIRCR |=(3<<8);
 		__NVIC_SetPriority(USART2_IRQn, 1);
 		uint32_t ans = __NVIC_GetPriority(USART2_IRQn);
 		kprintf((uint8_t*)"%s",(uint8_t*)"Set priority is: ");
 		kprintf((uint8_t*)"%d", (uint8_t*)&ans);
 		endl;
+		__NVIC_EnableIRQn(EXTI0_IRQn);
 
 		//Testing Enable and Disable
 		__NVIC_EnableIRQn(USART2_IRQn);
@@ -45,7 +47,6 @@ void kmain(void)
 		else  kprintf((uint8_t*)"%s",(uint8_t*)"Interrupt is disabled\n");
 
 		__disable_irq();
-
 		int primsk = __get_PRIMASK();
 
 		if(primsk != 0)
@@ -72,22 +73,34 @@ void kmain(void)
 		//If we set the base pri to 3, then SVCALL should now 
 		// __set_BASEPRI(7);
 		
-		__NVIC_EnableIRQn(EXTI0_IRQn);
-		__NVIC_SetPriority(EXTI0_IRQn,10);
+		
+		__NVIC_SetPriority(EXTI0_IRQn,5);
+		ans = __NVIC_GetPriority(EXTI0_IRQn);
+		kprintf((uint8_t*)"%s",(uint8_t*)"Set priority for EXTI0_IRQn is: ");
+		kprintf((uint8_t*)"%d", (uint8_t*)&ans);
+		endl;
 		NVIC->STIR = EXTI0_IRQn;
 
 
-		__set_BASEPRI(5);
+		__set_BASEPRI(3<<4);
 		ans = __get_BASEPRI();
 		kprintf((uint8_t*)"%s",(uint8_t*)"BASEPRI set to: ");
 		kprintf((uint8_t*)"%d", (uint8_t*)&ans);
 		endl;
-		
+
+		//this should not be triggered.
 		NVIC->STIR = EXTI0_IRQn;
-
-
+		if(__NVIC_GetPendingIRQ(EXTI0_IRQn) == 1)
+		{
+			kprintf((uint8_t*)"%s",(uint8_t*)"EXTI0_IRQn is currently in pending");
+		}
+		__NVIC_ClearPendingIRQ(EXTI0_IRQn);
 		__unset_BASEPRI();
-		
+
+		ans = __get_BASEPRI();
+		kprintf((uint8_t*)"%s",(uint8_t*)"BASEPRI set to: ");
+		kprintf((uint8_t*)"%d", (uint8_t*)&ans);
+		endl;
 
 
 		//Testing integer

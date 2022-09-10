@@ -130,7 +130,7 @@ void __NVIC_SetPriority(IRQn_TypeDef IRQn, uint32_t priority)
         int shp = ((uint32_t)IRQn & 15) - 4U;
         SCB->SHP[shp] = (uint8_t)((priority << (8U - __NVIC__PRIO_BITS)) & 255U );
     }
-    else NVIC->IP[IRQn] = (uint8_t)( (priority << (8U-__NVIC__PRIO_BITS)) & 255U);
+    else NVIC->IP[IRQn] = (uint8_t)( (priority << (8U-__NVIC__PRIO_BITS)) & 0xFFU);
 }
 //Tested
 uint32_t __NVIC_GetPriority(IRQn_TypeDef IRQn)
@@ -188,13 +188,19 @@ uint32_t __set_PRIMASK(uint32_t value)
 {
     __asm volatile("MSR primask, %0" : : "r" (value) : "memory");
 }
-//TODO TEST
-void __set_BASEPRI(uint32_t basePri)
+//Tested
+void __set_BASEPRI(uint32_t value)
 {
-    basePri = basePri << 4;
-    __asm volatile ("MSR basepri, %0" : : "r" (basePri) : "memory");
+   __asm volatile("MOVS R12, %0"
+                   :
+                   : "r"(value & 0xFFU)
+                   :);
+    __asm volatile("MSR BASEPRI, R12"
+                   :
+                   :
+                   :);
 }
-//TODO test
+//tested
 void __unset_BASEPRI()
 {
     __set_BASEPRI(0);
@@ -210,6 +216,7 @@ uint32_t __NVIC_GetActive(IRQn_TypeDef IRQn)
   }
   
 }
+//Tested
 uint32_t __get_BASEPRI(void)
 {
   uint32_t result;
@@ -238,7 +245,7 @@ uint32_t __get_FAULTMASK(void)
   __asm volatile ("MRS %0, faultmask" : "=r" (result) );
   return(result);
 }
-
+//Tested
 void __NVIC_ClearPendingIRQ(IRQn_TypeDef IRQn)
 {
   if(IRQn < 0)return;
@@ -255,7 +262,7 @@ uint32_t __NVIC_GetPendingIRQ(IRQn_TypeDef IRQn)
   else
   {
     int ispr = IRQn/32;
-    if(NVIC->ISPR[ispr] & (1<< IRQn&31) != 0)return 1;
+    if(NVIC->ISPR[ispr] & (1UL<< (IRQn&31)) != 0)return 1;
     else return 0;
   }
 }

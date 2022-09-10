@@ -157,7 +157,7 @@ typedef enum
 
 #define NVIC ((NVIC_TypeDef*) (0xE000E100))
 #define SCB ((SCB_TypeDef *) (0xE000ED00))
-#define __NVIC__PRIO_BITS 3U
+#define __NVIC__PRIO_BITS 4U
 #define SYSTICK ((SysTick_Typedef*) 0xE000E010)
 #define SYSTICK_CTRL_CLKSOURCE_AHB (1 << 2)
 #define SYSTICK_CTRL_TICKINT (1 << 1)
@@ -198,4 +198,5 @@ void __set_FAULTMASK(uint32_t faultMask);
 void __disable_fault_irq(void);
 void __NVIC_ClearPendingIRQ(IRQn_TypeDef IRQn);
 uint32_t __NVIC_GetPendingIRQ(IRQn_TypeDef IRQn);
+
 #endif
