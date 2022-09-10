@@ -189,21 +189,73 @@ uint32_t __set_PRIMASK(uint32_t value)
     __asm volatile("MSR primask, %0" : : "r" (value) : "memory");
 }
 //TODO TEST
-__attribute__((naked)) void __set_BASEPRI(uint32_t value)
+void __set_BASEPRI(uint32_t basePri)
 {
-    __asm volatile("MSR basepri, %0" : : "r" (value) : "memory");
+    basePri = basePri << 4;
+    __asm volatile ("MSR basepri, %0" : : "r" (basePri) : "memory");
 }
 //TODO test
 void __unset_BASEPRI()
 {
     __set_BASEPRI(0);
 }
+uint32_t __NVIC_GetActive(IRQn_TypeDef IRQn)
+{
+  if(IRQn < 0)return 0;
+  else
+  {
+    int iabr = IRQn/32;
+    if(NVIC->IABR[iabr] & (1 << (IRQn&31)) != 0)return 1;
+    else return 0;
+  }
+  
+}
+uint32_t __get_BASEPRI(void)
+{
+  uint32_t result;
 
-//TODO implement __enable_fault_irq(void)
-//TODO implement __set_FAULTMASK(uint32_t value)
-//TODO implement __disable_fault_irq(void)
-//TODO __get_FAULTMASK
+  __asm volatile ("MRS %0, basepri" : "=r" (result) );
+  return(result>>4);
+}
+//TODO TEST
+void __enable_fault_irq(void)
+{
+  __asm volatile ("cpsie f" : : : "memory");
+}
+//TODO test
+void __set_FAULTMASK(uint32_t faultMask)
+{
+  __asm volatile ("MSR faultmask, %0" : : "r" (faultMask) : "memory");
+}
+void __disable_fault_irq(void)
+{
+  __asm volatile ("cpsid f" : : : "memory");
+}
+uint32_t __get_FAULTMASK(void)
+{
+  uint32_t result;
 
-//TODO __clear_pending_IRQn(IRQn_TypeDef IRQn)
-//TODO __get_pending_IRQn(IRQn_TypeDef IRQn)
-//TODO __NVIC_getActive(IRQn_TypeDef IRQn)
+  __asm volatile ("MRS %0, faultmask" : "=r" (result) );
+  return(result);
+}
+
+void __NVIC_ClearPendingIRQ(IRQn_TypeDef IRQn)
+{
+  if(IRQn < 0)return;
+  else
+  {
+    int icpr = IRQn/32;
+    NVIC->ICPR[icpr] = (uint32_t)(1UL << (((uint32_t)IRQn) & 31));
+  }
+}
+uint32_t __NVIC_GetPendingIRQ(IRQn_TypeDef IRQn)
+{
+
+  if(IRQn<0)return 0;
+  else
+  {
+    int ispr = IRQn/32;
+    if(NVIC->ISPR[ispr] & (1<< IRQn&31) != 0)return 1;
+    else return 0;
+  }
+}

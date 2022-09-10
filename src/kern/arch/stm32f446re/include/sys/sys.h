@@ -189,8 +189,13 @@ void __disable_irq(void);
 void __enable_irq(void);
 uint32_t __get_PRIMASK(void);
 void _set_PRIMASK(uint32_t value);
-void __set_BASEPRI(uint32_t value);
+void __set_BASEPRI(uint32_t basePri);
 void __unset_BASEPRI();
 uint32_t __get_BASEPRI(void);
-
+uint32_t __NVIC_GetActive(IRQn_TypeDef IRQn);
+void __enable_fault_irq(void);
+void __set_FAULTMASK(uint32_t faultMask);
+void __disable_fault_irq(void);
+void __NVIC_ClearPendingIRQ(IRQn_TypeDef IRQn);
+uint32_t __NVIC_GetPendingIRQ(IRQn_TypeDef IRQn);
 #endif

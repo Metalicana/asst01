@@ -42,7 +42,6 @@
 #define TIM13 	((TIM_TypeDef *)0x40001C00)
 #define TIM14 	((TIM_TypeDef *)0x40002000)
 
-#define SCB ((SCB_typeDef *) 0xE000ED00)
 /**
 *
 * Data Structure for FLASH control Register
