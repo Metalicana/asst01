@@ -112,15 +112,20 @@ void SysTick_Handler(void)
     *pICSR |= ( 1 << 25);
     // kprintf((uint8_t*)"%s",(uint8_t*)"SysTick_Handler after? death4\n\r");
 }
+
+//This method gets called when EXTI0_IRQn is trigggered
 void EXTI0_Handler(void)
 {
 	_USART_WRITE(USART2,(uint8_t*)"Interrupt triggered\n");
 }
+
+//This method gets called when a system exception is triggered called Service call handler
 void SVCall_Handler(void)
 {
     _USART_WRITE(USART2,(uint8_t*)"System Exception triggered\n");
 }
-//Tested but TODO handle for negative IRQs
+//Tested
+//This sets the priority for the IRQn's
 void __NVIC_SetPriority(IRQn_TypeDef IRQn, uint32_t priority)
 {
     //The way this works is, if someone performs  x & with 15 where x is negative,
@@ -137,6 +142,7 @@ void __NVIC_SetPriority(IRQn_TypeDef IRQn, uint32_t priority)
     else NVIC->IP[IRQn] = (uint8_t)( (priority << (8U-__NVIC__PRIO_BITS)) & 0xFFU);
 }
 //Tested
+//This returns the priority value of the IRQn
 uint32_t __NVIC_GetPriority(IRQn_TypeDef IRQn)
 {
     if(IRQn < 0)
@@ -149,6 +155,7 @@ uint32_t __NVIC_GetPriority(IRQn_TypeDef IRQn)
 
 //Will not work with negative numbers
 //Tested
+//This enables interrupts with non-negative values
 void __NVIC_EnableIRQn(IRQn_TypeDef IRQn)
 {   
     if(IRQn< 0)return;
@@ -156,6 +163,7 @@ void __NVIC_EnableIRQn(IRQn_TypeDef IRQn)
     NVIC->ISER[iser] = (1 << (IRQn & 31));
 }
 //Tested
+//This disables interrupts with non-negative values
 void __NVIC_DisableIRQn(IRQn_TypeDef IRQn)
 {
     if(IRQn < 0)return;
@@ -163,6 +171,7 @@ void __NVIC_DisableIRQn(IRQn_TypeDef IRQn)
     NVIC->ICER[icer] = (1 << (IRQn & 31));
 }
 //Tested
+//This checks if an interrupt is enabled or not
 uint32_t isEnabled(IRQn_TypeDef IRQn)
 {
     if(IRQn<0)return;
@@ -171,17 +180,20 @@ uint32_t isEnabled(IRQn_TypeDef IRQn)
     return 0;
 }
 //Tested
+//This assembly code disables all interrupts and exceptions with programmable priority
 void __disable_irq(void)
 {
     __asm volatile("cpsid i" : : : "memory");
 }
 //Tested
+//This assembly code enables all interrupts and exceptions with programmable priority
 void __enable_irq(void)
 {
     __asm volatile("cpsie i" : : : "memory");
 }
 
 //Tested
+//This returns the primask value
 uint32_t __get_PRIMASK(void)
 {
     uint32_t res;
@@ -189,11 +201,13 @@ uint32_t __get_PRIMASK(void)
     return (res);
 }
 //Tested
+//This sets the PRIMASK value, setting it to 1 is the same as __disable_irq
 void __set_PRIMASK(uint32_t value)
 {
     __asm volatile("MSR primask, %0" : : "r" (value) : "memory");
 }
 //Tested
+//This sets the basepri value, which masks all interrupts with equal or lower priority than value
 void __set_BASEPRI(uint32_t value)
 {
    __asm volatile("MOVS R12, %0"
@@ -206,10 +220,13 @@ void __set_BASEPRI(uint32_t value)
                    :);
 }
 //tested
+//This undoes the basepri to allow all interrupts to be unmasked
 void __unset_BASEPRI()
 {
     __set_BASEPRI(0);
 }
+//tested
+//Checks if an intterupt is active or not
 uint32_t __NVIC_GetActive(IRQn_TypeDef IRQn)
 {
   if(IRQn < 0)return 0;
@@ -222,6 +239,7 @@ uint32_t __NVIC_GetActive(IRQn_TypeDef IRQn)
   
 }
 //Tested
+//Returns the basepri value
 uint32_t __get_BASEPRI(void)
 {
   uint32_t result;
@@ -230,21 +248,25 @@ uint32_t __get_BASEPRI(void)
   return(result>>4);
 }
 //Tested
+//enables all interrupts except NMI's
 void __enable_fault_irq(void)
 {
   __asm volatile ("cpsie f" : : : "memory");
 }
 //Testes
+//Does the same as __disable_fault_irq but manually
 void __set_FAULTMASK(uint32_t faultMask)
 {
   __asm volatile ("MSR faultmask, %0" : : "r" (faultMask) : "memory");
 }
 //tested
+//disables all interrupts except NMI's
 void __disable_fault_irq(void)
 {
   __asm volatile ("cpsid f" : : : "memory");
 }
 //tested
+//returns FAULTMASK value
 uint32_t __get_FAULTMASK(void)
 {
   uint32_t result;
@@ -253,6 +275,7 @@ uint32_t __get_FAULTMASK(void)
   return(result);
 }
 //Tested
+//Clears a pending IRQn trigger
 void __NVIC_ClearPendingIRQ(IRQn_TypeDef IRQn)
 {
   if(IRQn < 0)return;
@@ -263,6 +286,7 @@ void __NVIC_ClearPendingIRQ(IRQn_TypeDef IRQn)
   }
 }
 //Tested
+//Checks if an interrupt is pending
 uint32_t __NVIC_GetPendingIRQ(IRQn_TypeDef IRQn)
 {
 

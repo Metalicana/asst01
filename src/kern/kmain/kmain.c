@@ -118,7 +118,7 @@ void kmain(void)
 		kprintf((uint8_t*)"%s",(uint8_t*)"#####################################\n\n");
 
 
-		kprintf((uint8_t*)"%s",(uint8_t*)"Testing if __NVIC_EnableIRQn works for system exceptions\n");
+		kprintf((uint8_t*)"%s",(uint8_t*)"Testing if __NVIC_EnableIRQn works for system exceptions and __NVIC_getActive\n");
 		//Testing set and get priority <0
 		__NVIC_EnableIRQn(SVCall_IRQn);
 		__NVIC_SetPriority(SVCall_IRQn,3);
@@ -126,6 +126,10 @@ void kmain(void)
 		kprintf((uint8_t*)"%s",(uint8_t*)"Set priority for SVCall_IRQn is: ");
 		kprintf((uint8_t*)"%d", (uint8_t*)&ans);
 		endl;
+
+		ans = __NVIC_GetActive(USART2_IRQn);
+		if(ans == 1)kprintf((uint8_t*)"%s",(uint8_t*)"USART2_IRQn status active\n ");
+		else kprintf((uint8_t*)"%s",(uint8_t*)"USART2_IRQn status inactive \n");
 
 		kprintf((uint8_t*)"%s",(uint8_t*)"#####################################\n\n");
 
