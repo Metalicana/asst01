@@ -8,7 +8,7 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # This program built for i386-pc-mingw32
  
 
-# Make data base, printed on Fri Sep 09 23:41:47 2022
+# Make data base, printed on Tue Sep 27 20:27:35 2022
 
 # Variables
 
@@ -77,9 +77,10 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives
 # automatic
-%F = $(notdir $%)
+%F 
+ = $(notdir $%)
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_19916_QPPYPEENJVWAHODB
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_13372_IRPDAEGZVVPUIYEW
 # environment
 POSTGIS_GDAL_ENABLED_DRIVERS = GTiff PNG JPEG GIF XYZ DTED USGSDEM AAIGrid
 # environment
@@ -167,7 +168,8 @@ REGIONCODE = APJ
 # environment
 SYSTEMROOT = C:\WINDOWS
 # automatic
-+D = $(patsubst %/,%,$(dir $+))
++D = 
+ $(patsubst %/,%,$(dir $+))
 # environment
 PLATFORMCODE = KV
 # automatic
@@ -203,7 +205,7 @@ PROCESSOR_LEVEL = 6
 # environment
 FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
 # environment
-VSCODE_PID = 19916
+VSCODE_PID = 13372
 # environment
 USERDOMAIN_ROAMINGPROFILE = LAPTOP-32POH404
 # variable set hash-table stats:
@@ -219,23 +221,25 @@ USERDOMAIN_ROAMINGPROFILE = LAPTOP-32POH404
 # C:\Users\Akuma\AppData\Local\Programs\Python\Python310\Scripts (key C:/Users/Akuma/AppData/Local/Programs/Python/Python310/Scripts, mtime 1659003163): 7 files, no impossibilities.
 # C:\Program Files\Common Files\Oracle\Java\javapath (key C:/Program Files/Common Files/Oracle/Java/javapath, mtime 1660227426): 6 files, no impossibilities.
 # C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\ (key C:/Program Files (x86)/Intel/Intel(R) Management Engine Components/iCLS/, mtime 1538753387): 8 files, no impossibilities.
-# C:\Users\Akuma\AppData\Roaming\npm (key C:/Users/Akuma/AppData/Roaming/npm, mtime 1642084732): 2 files, no impossibilities.
+# C:\Users\Akuma\AppData\Roaming\npm (key C:/Users/Akuma/AppD 
+ata/Roaming/npm, mtime 1642084732): 2 files, no impossibilities.
 # C:\Program Files (x86)\Microsoft SQL Server\150\DTS\Binn\ (key C:/Program Files (x86)/Microsoft SQL Server/150/DTS/Binn/, mtime 1613994068): 4 files, no impossibilities.
 # C:\Program Files\Java\jdk-13.0.1\bin (key C:/Program Files/Java/jdk-13.0.1/bin, mtime 1578974759): 126 files, no impossibilities.
-# C:\Program Files (x86)\Razer\ChromaBroadcast\bin (key C:/Program Files (x86)/Razer/ChromaBroadcast/bin, mtime 1630664692): 5 files, no impossibilities.
+# C:\Program Files (x86)\Razer\ChromaBroadcast\bin (key C:/Program Files (x86)/Razer/ChromaBroadcast/bin, mtime 1663827462): 6 files, no impossibilities.
 # C:\Program Files\Microsoft SQL Server\150\Tools\Binn\ (key C:/Program Files/Microsoft SQL Server/150/Tools/Binn/, mtime 1613994076): 13 files, no impossibilities.
 # C:\Program Files\JetBrains\PyCharm Community Edition 2021.3.2\bin (key C:/Program Files/JetBrains/PyCharm Community Edition 2021.3.2/bin, mtime 1643817999): 29 files, no impossibilities.
 # C:\flutter\flutter\bin (key C:/flutter/flutter/bin, mtime 1643201011): 8 files, no impossibilities.
-# C:\Program Files (x86)\Razer Chroma SDK\bin (key C:/Program Files (x86)/Razer Chroma SDK/bin, mtime 1662695587): 266 files, no impossibilities.
+# C:\Program Files (x86)\Razer Chroma SDK\bin (key C:/Program Files (x86)/Razer Chroma SDK/bin, mtime 1663827508): 268 files, no impossibilities.
 # C:\windows\System32\WindowsPowerShell\v1.0\ (key C:/windows/System32/WindowsPowerShell/v1.0/, mtime 1635972474): 32 files, no impossibilities.
 # C:\windows\System32\Wbem (key C:/windows/System32/Wbem, mtime 1652394791): 155 files, no impossibilities.
 # . (key f:/OS assignments/5_7_asst02/asst01, mtime 1662254474): 6 files, no impossibilities.
 # C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common (key C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common, mtime 1538753507): 10 files, no impossibilities.
 # E:\xpack-openocd-0.11.0-4\bin (key E:/xpack-openocd-0.11.0-4/bin, mtime 1648229629): 5 files, no impossibilities.
 # C:\Program Files (x86)\GNU Arm Embedded Toolchain\10 2021.10\bin (key C:/Program Files (x86)/GNU Arm Embedded Toolchain/10 2021.10/bin, mtime 1655973257): 35 files, no impossibilities.
-# C:\Program Files\nodejs\ (key C:/Program Files/nodejs/, mtime 1642084736): 13 files, no impossibilities.
+# C:\Program Files\nodejs\ (key C:/Program Files/nodejs/, mtime 1642084736): 13 files, no impossibilities. 
+
 # D:\Microsoft VS Code\bin (key D:/Microsoft VS Code/bin, mtime 1662058880): 4 files, no impossibilities.
-# C:\Users\Akuma\AppData\Local\Microsoft\WindowsApps (key C:/Users/Akuma/AppData/Local/Microsoft/WindowsApps, mtime 1662622147): 33 files, no impossibilities.
+# C:\Users\Akuma\AppData\Local\Microsoft\WindowsApps (key C:/Users/Akuma/AppData/Local/Microsoft/WindowsApps, mtime 1664271552): 33 files, no impossibilities.
 # C:\MinGW\bin (key C:/MinGW/bin, mtime 1577520097): 142 files, no impossibilities.
 # C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\ (key C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/, mtime 1613994088): 6 files, no impossibilities.
 # C:\Program Files\Java\jdk-13.0.1 (key C:/Program Files/Java/jdk-13.0.1, mtime 1578974760): 10 files, no impossibilities.
@@ -244,28 +248,31 @@ USERDOMAIN_ROAMINGPROFILE = LAPTOP-32POH404
 # C:\Program Files\PuTTY\: could not be stat'd.
 # C:\Program Files (x86)\Common Files\Oracle\Java\javapath (key C:/Program Files (x86)/Common Files/Oracle/Java/javapath, mtime 1660227587): 5 files, no impossibilities.
 # C:\Program Files\Intel\Intel(R) Management Engine Components\DAL (key C:/Program Files/Intel/Intel(R) Management Engine Components/DAL, mtime 1538753384): 4 files, no impossibilities.
-# C:\windows (key C:/windows, mtime 1660180261): 130 files, no impossibilities.
-# C:\Users\Akuma\AppData\Local\Android\Sdk\platform-tools (key C:/Users/Akuma/AppData/Local/Android/Sdk/platform-tools, mtime 1623437939): 20 files, no impossibilities.
+# C:\windows (key C:/windows, mtime 1663118970): 130 files, no impossibilities.
+# C:\Users\Akuma\AppData\Local\Android\Sdk\platform-tools (key C:/Users/Akuma/AppData/Local/Android/Sdk/platform-tools, mtime 1623437939): 20 fi 
+les, no impossibilities.
 # C:\Program Files (x86)\Microsoft SQL Server\150\Tools\Binn\ (key C:/Program Files (x86)/Microsoft SQL Server/150/Tools/Binn/, mtime 1613994076): 11 files, no impossibilities.
 # C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\ (key C:/Program Files/Intel/Intel(R) Management Engine Components/iCLS/, mtime 1538753386): 11 files, no impossibilities.
 # C:\Program Files\Intel\WiFi\bin\ (key C:/Program Files/Intel/WiFi/bin/, mtime 1550166473): 38 files, no impossibilities.
 # C:\Program Files\Common Files\Intel\WirelessCommon\ (key C:/Program Files/Common Files/Intel/WirelessCommon/, mtime 1550166473): 7 files, no impossibilities.
 # C:\Program Files\Azure Data Studio\bin (key C:/Program Files/Azure Data Studio/bin, mtime 1613995707): 4 files, no impossibilities.
 # C:\Program Files\Microsoft SQL Server\150\DTS\Binn\ (key C:/Program Files/Microsoft SQL Server/150/DTS/Binn/, mtime 1613994088): 46 files, no impossibilities.
-# C:\Program Files\Razer\ChromaBroadcast\bin (key C:/Program Files/Razer/ChromaBroadcast/bin, mtime 1630664692): 5 files, no impossibilities.
+# C:\Program Files\Razer\ChromaBroadcast\bin (key C:/Program Files/Razer/ChromaBroadcast/bin, mtime 1663827462): 6 files, no impossibilities.
 # C:\Users\Akuma\Desktop\GNU MCU Eclipse\OpenOCD\0.10.0-12-20190422-2015\bin: could not be stat'd.
-# C:\Program Files\Razer Chroma SDK\bin (key C:/Program Files/Razer Chroma SDK/bin, mtime 1635469043): 5 files, no impossibilities.
+# C:\Program Files\Razer Chroma SDK\bin (key C:/Program Files/Razer Chroma SDK/bin, mtime 1663827445): 6 files, no impossibilities.
 # C:\Users\Akuma\AppData\Local\atom\bin (key C:/Users/Akuma/AppData/Local/atom/bin, mtime 1570248370): 6 files, no impossibilities.
-# C:\Program Files\Git\cmd (key C:/Program Files/Git/cmd, mtime 1661860874): 8 files, no impossibilities.
-# C:\windows\system32 (key C:/windows/system32, mtime 1662653428): 3085 files, no impossibilities.
+# C:\Program Files\Git\cmd (key C:/Program Files/Git/cmd, mt 
+ime 1661860874): 8 files, no impossibilities.
+# C:\windows\system32 (key C:/windows/system32, mtime 1664277366): 3085 files, no impossibilities.
 # C:\Program Files (x86)\VMware\VMware Player\bin\ (key C:/Program Files (x86)/VMware/VMware Player/bin/, mtime 1614365126): 4 files, no impossibilities.
 # C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT (key C:/Program Files (x86)/Intel/Intel(R) Management Engine Components/IPT, mtime 1538753384): 6 files, no impossibilities.
 # C:\Program Files (x86)\GnuWin32\bin (key C:/Program Files (x86)/GnuWin32/bin, mtime 1655974063): 5 files, no impossibilities.
 # C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR (key C:/Program Files/NVIDIA Corporation/NVIDIA NvDLISR, mtime 1545562147): 5 files, no impossibilities.
 # C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL (key C:/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL, mtime 1538753384): 10 files, no impossibilities.
-# C:\windows\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps: could not be stat'd.
+# C:\windows\system32\config\systemprofile 
+\AppData\Local\Microsoft\WindowsApps: could not be stat'd.
 
-# 4345 files, no impossibilities in 49 directories.
+# 4350 files, no impossibilities in 49 directories.
 
 # Implicit Rules
 
@@ -307,7 +314,10 @@ makefile:
 # Not a target:
 GNUmakefile:
 #  A default, MAKEFILES, or -include/sinclude makefile.
-#  Implicit rule search has been done.
+#  Implicit ru 
+make.exe: *** No rule to make target `all'.  Stop.
+
+le search has been done.
 #  File does not exist.
 #  File has been updated.
 #  Failed to be updated.
@@ -327,8 +337,6 @@ GNUmakefile:
 # strcache size: total = 0 / max = 0 / min = 4096 / avg = 0
 # strcache free: total = 0 / max = 0 / min = 4096 / avg = 0
 
-# Finished Make data base on Fri Sep 09 23:41:47 2022
+# Finished Make data base on Tue Sep 27 20:27:35 2022
 
  
-make.exe: *** No rule to make target `all'.  Stop.
-
